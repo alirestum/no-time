@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>No Time — Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #e11d48;
+        --on-primary: #ffffff;
+        --secondary: #fb7185;
+        --accent: #2563eb;
+        --bg: #fff1f2;
+        --bg-grad: linear-gradient(160deg, #ffe4e6 0%, #fff1f2 45%, #fce7f3 100%);
+        --surface: #ffffff;
+        --fg: #881337;
+        --fg-soft: #9f1239;
+        --ink: #2a0e1a;
+        --border: #fecdd3;
+        --destructive: #dc2626;
+        --radius-lg: 30px;
+        --radius-md: 20px;
+        --radius-sm: 14px;
+        --shadow-clay:
+          12px 14px 30px rgba(225, 29, 72, 0.18),
+          -8px -8px 22px rgba(255, 255, 255, 0.95),
+          inset 1px 1px 2px rgba(255, 255, 255, 0.6),
+          inset -1px -1px 2px rgba(225, 29, 72, 0.06);
+        --shadow-clay-soft:
+          6px 8px 18px rgba(225, 29, 72, 0.14),
+          -4px -4px 14px rgba(255, 255, 255, 0.9);
+        --shadow-clay-inset:
+          inset 4px 4px 10px rgba(225, 29, 72, 0.12),
+          inset -3px -3px 8px rgba(255, 255, 255, 0.92);
+      }
+
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+        background: var(--bg-grad);
+        color: var(--ink);
+        min-height: 100vh;
+      }
+      body {
+        max-width: 580px;
+        margin: 0 auto;
+        padding: 40px 24px 60px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 20px;
+        box-shadow: var(--shadow-clay);
+        flex-shrink: 0;
+      }
+      h1 {
+        font-family: "Nunito", sans-serif;
+        font-weight: 900;
+        font-size: 28px;
+        margin: 0;
+        color: var(--fg);
+        letter-spacing: -0.6px;
+      }
+      .subtitle {
+        font-size: 13px;
+        color: var(--fg-soft);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        padding: 26px 28px;
+        box-shadow: var(--shadow-clay);
+        margin-bottom: 22px;
+      }
+      .card-title {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--fg);
+        margin-bottom: 4px;
+      }
+      .card-sub {
+        font-size: 12.5px;
+        color: var(--fg-soft);
+        margin-bottom: 18px;
+        line-height: 1.5;
+      }
+
+      label {
+        display: block;
+        font-family: "Nunito", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--fg-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin: 16px 0 8px;
+      }
+      label:first-of-type { margin-top: 0; }
+
+      input[type="text"], input[type="password"] {
+        width: 100%;
+        appearance: none;
+        background: var(--bg);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: 14px 18px;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--fg);
+        box-shadow: var(--shadow-clay-inset);
+        transition: box-shadow .2s;
+      }
+      input:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      /* CLAY SELECT */
+      .clay-select { position: relative; }
+      .clay-select-trigger {
+        width: 100%;
+        background: var(--bg);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: 14px 18px;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--fg);
+        box-shadow: var(--shadow-clay-inset);
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .clay-select-trigger:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .clay-select-trigger .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #fb7185, #e11d48);
+        flex-shrink: 0;
+        box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.15);
+      }
+      .clay-select-trigger .chevron {
+        margin-left: auto;
+        width: 9px;
+        height: 9px;
+        border-right: 2.5px solid var(--fg);
+        border-bottom: 2.5px solid var(--fg);
+        transform: rotate(45deg) translate(-2px, -2px);
+        transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+      }
+      .clay-select.open .chevron {
+        transform: rotate(-135deg) translate(-2px, -2px);
+      }
+
+      .clay-select-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-clay);
+        padding: 8px;
+        z-index: 50;
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+        pointer-events: none;
+        transition: opacity .15s, transform .2s cubic-bezier(.34, 1.56, .64, 1);
+      }
+      .clay-select.open .clay-select-menu {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .clay-select-option {
+        padding: 12px 14px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: background .15s, transform .12s;
+      }
+      .clay-select-option:hover {
+        background: var(--bg);
+        transform: translateX(2px);
+      }
+      .clay-select-option:active { transform: translateX(2px) scale(0.98); }
+      .clay-select-option.selected {
+        background: linear-gradient(145deg, rgba(251, 113, 133, 0.14), rgba(225, 29, 72, 0.08));
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        color: var(--primary);
+      }
+      .clay-select-option .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #fb7185, #e11d48);
+        flex-shrink: 0;
+      }
+      .clay-select-option .check {
+        margin-left: auto;
+        opacity: 0;
+        color: var(--primary);
+        transition: opacity .15s;
+      }
+      .clay-select-option.selected .check { opacity: 1; }
+      .clay-select-option-sub {
+        font-size: 11.5px;
+        color: var(--fg-soft);
+        font-weight: 500;
+        margin-left: 6px;
+      }
+      .clay-select-option.selected .clay-select-option-sub { color: var(--fg-soft); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .clay-select-menu, .chevron, .clay-select-option { transition: none; }
+      }
+      .hint {
+        font-size: 11.5px;
+        color: var(--fg-soft);
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+
+      .provider-section {
+        padding: 18px 20px;
+        background: var(--bg);
+        border-radius: var(--radius-md);
+        margin-bottom: 14px;
+        box-shadow: var(--shadow-clay-inset);
+      }
+      .provider-section:last-child { margin-bottom: 0; }
+      .provider-name {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        color: var(--primary);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .provider-name .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #fb7185, #e11d48);
+      }
+      .provider-section label { margin-top: 10px; }
+      .provider-section label:first-of-type { margin-top: 0; }
+      .provider-section select,
+      .provider-section input {
+        background: var(--surface);
+        box-shadow:
+          inset 2px 2px 6px rgba(225, 29, 72, 0.08),
+          inset -1px -1px 3px rgba(255, 255, 255, 0.9);
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 8px;
+      }
+      .btn-primary {
+        padding: 14px 28px;
+        background: linear-gradient(145deg, #f43f5e, #e11d48);
+        color: var(--on-primary);
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        letter-spacing: 0.2px;
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        box-shadow:
+          8px 10px 22px rgba(225, 29, 72, 0.38),
+          -4px -4px 14px rgba(255, 255, 255, 0.7),
+          inset 1px 1px 2px rgba(255, 255, 255, 0.45),
+          inset -1px -1px 2px rgba(0, 0, 0, 0.12);
+        transition: transform .15s cubic-bezier(.34, 1.56, .64, 1);
+      }
+      .btn-primary:hover { transform: translateY(-1px); }
+      .btn-primary:active {
+        transform: scale(0.96);
+      }
+      .saved {
+        font-family: "Nunito", sans-serif;
+        font-weight: 700;
+        color: #16a34a;
+        font-size: 13px;
+        opacity: 0;
+        transition: opacity .2s;
+      }
+      .saved.visible { opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <svg class="logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="No Time logo">
+        <defs>
+          <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FB7185" />
+            <stop offset="1" stop-color="#E11D48" />
+          </linearGradient>
+          <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35" />
+            <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#rose)" />
+        <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#shine)" />
+        <path fill="#FFFFFF" d="M20.55 50.13Q18.45 50.13 17.35 48.98Q16.25 47.83 16.25 45.73L16.25 18.42Q16.25 16.27 17.35 15.07Q18.45 13.88 20.30 13.88Q21.85 13.88 22.75 14.50Q23.65 15.13 24.75 16.52L40.60 36.33L39.20 36.33L39.20 18.22Q39.20 16.17 40.27 15.02Q41.35 13.88 43.45 13.88Q45.55 13.88 46.65 15.02Q47.75 16.17 47.75 18.22L47.75 45.92Q47.75 47.77 46.73 48.95Q45.70 50.13 44 50.13Q42.30 50.13 41.33 49.50Q40.35 48.88 39.20 47.48L23.40 27.63L24.80 27.63L24.80 45.73Q24.80 47.83 23.72 48.98Q22.65 50.13 20.55 50.13"/>
+      </svg>
+      <div>
+        <h1>Settings</h1>
+        <div class="subtitle">Keys stay on your computer. Sent only to the provider you pick.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Default provider</div>
+      <div class="card-sub">Used every time you click Summarize.</div>
+      <div class="clay-select" id="preferredProvider" data-value="anthropic">
+        <button type="button" class="clay-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="dot"></span>
+          <span class="label">Claude</span>
+          <span class="clay-select-option-sub">Anthropic</span>
+          <span class="chevron"></span>
+        </button>
+        <div class="clay-select-menu" role="listbox">
+          <div class="clay-select-option selected" data-value="anthropic" data-label="Claude" data-sub="Anthropic" role="option" tabindex="0">
+            <span class="dot"></span>
+            <span>Claude</span>
+            <span class="clay-select-option-sub">Anthropic</span>
+            <svg class="check" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8 L7 12 L13 4"/></svg>
+          </div>
+          <div class="clay-select-option" data-value="openai" data-label="OpenAI" data-sub="GPT" role="option" tabindex="0">
+            <span class="dot"></span>
+            <span>OpenAI</span>
+            <span class="clay-select-option-sub">GPT</span>
+            <svg class="check" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8 L7 12 L13 4"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">API keys & models</div>
+      <div class="card-sub">Set up either or both. The default provider above decides which one runs.</div>
+
+      <div class="provider-section">
+        <div class="provider-name"><span class="dot"></span>Claude (Anthropic)</div>
+        <label for="anthropicKey">API key</label>
+        <input type="password" id="anthropicKey" placeholder="sk-ant-..." autocomplete="off" />
+        <label for="anthropicModel">Model</label>
+        <input type="text" id="anthropicModel" placeholder="claude-haiku-4-5" autocomplete="off" />
+        <div class="hint">Default: <code>claude-haiku-4-5</code> — fast and cheap. For higher quality: <code>claude-sonnet-4-6</code>.</div>
+      </div>
+
+      <div class="provider-section">
+        <div class="provider-name"><span class="dot"></span>OpenAI</div>
+        <label for="openaiKey">API key</label>
+        <input type="password" id="openaiKey" placeholder="sk-..." autocomplete="off" />
+        <label for="openaiModel">Model</label>
+        <input type="text" id="openaiModel" placeholder="gpt-4o-mini" autocomplete="off" />
+        <div class="hint">Default: <code>gpt-4o-mini</code>.</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-primary" id="save">Save changes</button>
+      <span class="saved" id="saved">Saved.</span>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

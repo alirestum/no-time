@@ -1,0 +1,592 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>No Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #e11d48;
+        --primary-deep: #be123c;
+        --on-primary: #ffffff;
+        --secondary: #fb7185;
+        --accent: #2563eb;
+        --bg: #fff1f2;
+        --bg-grad: linear-gradient(160deg, #ffe4e6 0%, #fff1f2 45%, #fce7f3 100%);
+        --surface: #ffffff;
+        --fg: #881337;
+        --fg-soft: #9f1239;
+        --ink: #2a0e1a;
+        --muted: #f0ecf2;
+        --border: #fecdd3;
+        --destructive: #dc2626;
+        --radius-lg: 30px;
+        --radius-md: 20px;
+        --radius-sm: 14px;
+        --shadow-clay:
+          12px 14px 30px rgba(225, 29, 72, 0.18),
+          -8px -8px 22px rgba(255, 255, 255, 0.95),
+          inset 1px 1px 2px rgba(255, 255, 255, 0.6),
+          inset -1px -1px 2px rgba(225, 29, 72, 0.06);
+        --shadow-clay-soft:
+          6px 8px 18px rgba(225, 29, 72, 0.14),
+          -4px -4px 14px rgba(255, 255, 255, 0.9);
+        --shadow-clay-inset:
+          inset 4px 4px 10px rgba(225, 29, 72, 0.12),
+          inset -3px -3px 8px rgba(255, 255, 255, 0.92);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        width: 460px;
+        margin: 0;
+        padding: 0;
+        font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+        background: var(--bg-grad);
+        color: var(--ink);
+        overflow-x: hidden;
+      }
+
+      body {
+        min-height: 560px;
+        max-height: 580px;
+        padding: 22px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* HEADER */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0;
+      }
+      .logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        box-shadow: var(--shadow-clay);
+        flex-shrink: 0;
+        display: block;
+      }
+      .header-text { line-height: 1.15; min-width: 0; }
+      h1 {
+        font-family: "Nunito", sans-serif;
+        font-weight: 900;
+        font-size: 26px;
+        margin: 0;
+        color: var(--fg);
+        letter-spacing: -0.6px;
+      }
+      .tagline {
+        font-size: 12px;
+        color: var(--fg-soft);
+        margin-top: 3px;
+        font-weight: 500;
+      }
+
+      /* CARD */
+      .card {
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        padding: 22px;
+        box-shadow: var(--shadow-clay);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      label {
+        display: block;
+        font-family: "Nunito", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--fg-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 8px;
+      }
+
+      /* INSET SELECT */
+      .select-wrap { position: relative; }
+      .select-wrap::after {
+        content: "";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-right: 2.5px solid var(--fg);
+        border-bottom: 2.5px solid var(--fg);
+        transform: translateY(-70%) rotate(45deg);
+        pointer-events: none;
+      }
+      select {
+        width: 100%;
+        appearance: none;
+        background: var(--bg);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: 14px 18px;
+        font: inherit;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--fg);
+        cursor: pointer;
+        box-shadow: var(--shadow-clay-inset);
+        transition: box-shadow .2s;
+      }
+      select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+      /* PRIMARY BUTTON */
+      .btn-primary {
+        width: 100%;
+        padding: 18px 22px;
+        background: linear-gradient(145deg, #f43f5e, #e11d48);
+        color: var(--on-primary);
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 17px;
+        letter-spacing: 0.2px;
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        box-shadow:
+          8px 10px 22px rgba(225, 29, 72, 0.38),
+          -4px -4px 14px rgba(255, 255, 255, 0.7),
+          inset 1px 1px 2px rgba(255, 255, 255, 0.45),
+          inset -1px -1px 2px rgba(0, 0, 0, 0.12);
+        transition: transform .15s cubic-bezier(.34, 1.56, .64, 1), box-shadow .15s;
+      }
+      .btn-primary:hover { transform: translateY(-1px); }
+      .btn-primary:active {
+        transform: scale(0.96);
+        box-shadow:
+          3px 4px 10px rgba(225, 29, 72, 0.3),
+          inset 4px 4px 8px rgba(0, 0, 0, 0.18),
+          inset -2px -2px 6px rgba(255, 255, 255, 0.25);
+      }
+      .btn-primary:disabled { opacity: 0.6; cursor: wait; transform: none; }
+      .btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+      /* SMALL BUTTONS */
+      .actions-row {
+        display: flex;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .btn-small {
+        flex: 1;
+        padding: 12px 14px;
+        background: var(--bg);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-family: "Nunito", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--fg);
+        cursor: pointer;
+        box-shadow: var(--shadow-clay-soft);
+        transition: transform .15s, box-shadow .15s;
+      }
+      .btn-small:hover { transform: translateY(-1px); }
+      .btn-small:active {
+        transform: scale(0.96);
+        box-shadow: var(--shadow-clay-inset);
+      }
+      .btn-small.accent {
+        background: linear-gradient(145deg, #3b82f6, #2563eb);
+        color: white;
+        box-shadow:
+          6px 8px 16px rgba(37, 99, 235, 0.32),
+          -3px -3px 10px rgba(255, 255, 255, 0.7);
+      }
+
+      .btn-ghost {
+        background: none;
+        border: none;
+        color: var(--fg-soft);
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: underline;
+        padding: 4px;
+        align-self: center;
+      }
+      .btn-ghost:hover { color: var(--primary); }
+
+      /* STATUS */
+      .status {
+        min-height: 16px;
+        font-size: 12px;
+        color: var(--fg-soft);
+        text-align: center;
+      }
+      .status.error { color: var(--destructive); font-weight: 500; }
+
+      /* LOADING */
+      .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        flex: 1;
+        justify-content: center;
+        padding: 20px;
+      }
+      .blob {
+        width: 88px;
+        height: 88px;
+        background: linear-gradient(145deg, #fb7185, #e11d48);
+        box-shadow:
+          14px 16px 32px rgba(225, 29, 72, 0.32),
+          -8px -8px 22px rgba(255, 255, 255, 0.9),
+          inset 2px 2px 4px rgba(255, 255, 255, 0.4);
+        animation: squish 1.6s ease-in-out infinite;
+        border-radius: 44px;
+      }
+      @keyframes squish {
+        0%, 100% { transform: scale(1) rotate(0deg); border-radius: 44px; }
+        25% { transform: scale(1.08, 0.92) rotate(4deg); border-radius: 50px 38px 46px 40px; }
+        50% { transform: scale(0.94, 1.06) rotate(-3deg); border-radius: 40px 48px 38px 50px; }
+        75% { transform: scale(1.05, 0.95) rotate(2deg); border-radius: 46px 42px 50px 38px; }
+      }
+      .loading-text {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        color: var(--fg);
+        font-size: 16px;
+        letter-spacing: -0.2px;
+      }
+      .loading-sub {
+        font-size: 12px;
+        color: var(--fg-soft);
+        text-align: center;
+        max-width: 280px;
+        line-height: 1.5;
+      }
+
+      /* RESULT */
+      .result-meta {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--fg-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .result-title {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 1.3;
+        color: var(--fg);
+        margin: 0;
+        max-height: 3.9em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+
+      .summary {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 6px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--ink);
+        scrollbar-width: thin;
+        scrollbar-color: var(--secondary) transparent;
+      }
+      .summary::-webkit-scrollbar { width: 6px; }
+      .summary::-webkit-scrollbar-thumb {
+        background: var(--secondary);
+        border-radius: 3px;
+      }
+      .summary::-webkit-scrollbar-track { background: transparent; }
+
+      .summary h2 {
+        font-family: "Nunito", sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        margin: 18px 0 6px;
+        color: var(--primary);
+        letter-spacing: -0.2px;
+        text-transform: uppercase;
+      }
+      .summary h2:first-child { margin-top: 0; }
+      .summary h3 {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 13.5px;
+        margin: 12px 0 4px;
+        color: var(--fg);
+      }
+      .summary p { margin: 6px 0; }
+      .summary ul, .summary ol { padding-left: 22px; margin: 8px 0; }
+      .summary li { margin: 6px 0; padding-left: 4px; }
+      .summary li::marker { color: var(--primary); font-weight: 700; }
+      .summary strong { color: var(--primary); font-weight: 700; }
+      .summary em { color: var(--fg); font-style: italic; }
+      .summary code {
+        background: var(--bg);
+        padding: 1px 6px;
+        border-radius: 6px;
+        font-size: 12.5px;
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        color: var(--accent);
+      }
+      .summary blockquote {
+        border-left: 3px solid var(--secondary);
+        margin: 10px 0;
+        padding: 4px 12px;
+        color: var(--fg-soft);
+        font-style: italic;
+        background: var(--bg);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+      .summary hr {
+        border: none;
+        height: 1px;
+        background: var(--border);
+        margin: 14px 0;
+      }
+
+      /* ERROR BOX */
+      .error-box {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 14px 16px;
+        border-radius: var(--radius-md);
+        font-size: 13px;
+        line-height: 1.5;
+        box-shadow: inset 3px 3px 8px rgba(220, 38, 38, 0.15);
+      }
+
+      /* SETUP */
+      .setup-intro {
+        text-align: center;
+      }
+      .setup-title {
+        font-family: "Nunito", sans-serif;
+        font-weight: 900;
+        font-size: 18px;
+        color: var(--fg);
+        margin-bottom: 6px;
+      }
+      .setup-sub {
+        font-size: 12.5px;
+        color: var(--fg-soft);
+        line-height: 1.5;
+      }
+      .provider-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .provider-card {
+        padding: 14px;
+        border: none;
+        background: var(--bg);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        text-align: center;
+        box-shadow: var(--shadow-clay-soft);
+        transition: transform .15s, box-shadow .15s;
+      }
+      .provider-card:hover { transform: translateY(-1px); }
+      .provider-card.active {
+        background: linear-gradient(145deg, #f43f5e, #e11d48);
+        color: white;
+        box-shadow:
+          6px 8px 18px rgba(225, 29, 72, 0.32),
+          -3px -3px 10px rgba(255, 255, 255, 0.7),
+          inset 1px 1px 2px rgba(255, 255, 255, 0.35);
+      }
+      .provider-name {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+      }
+      .provider-sub {
+        font-size: 11px;
+        opacity: 0.75;
+        margin-top: 2px;
+      }
+
+      input[type="password"], input[type="text"] {
+        width: 100%;
+        background: var(--bg);
+        border: none;
+        border-radius: var(--radius-md);
+        padding: 14px 16px;
+        font: inherit;
+        font-size: 14px;
+        color: var(--fg);
+        box-shadow: var(--shadow-clay-inset);
+      }
+      input:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .key-help {
+        font-size: 11px;
+        color: var(--fg-soft);
+        margin-top: 6px;
+        text-align: center;
+      }
+      .key-help a { color: var(--accent); font-weight: 600; }
+
+      /* PROVIDER CHIP */
+      .provider-chip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: var(--bg);
+        border-radius: 100px;
+        font-size: 13px;
+        color: var(--fg);
+        box-shadow: var(--shadow-clay-inset);
+      }
+      .provider-chip .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #fb7185, #e11d48);
+        box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2);
+      }
+      .provider-chip strong {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      /* EMPTY HINT */
+      .hint {
+        font-size: 13px;
+        color: var(--fg-soft);
+        line-height: 1.5;
+        text-align: center;
+        padding: 14px;
+        background: var(--bg);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-clay-inset);
+      }
+
+      .hidden { display: none !important; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .blob { animation: none; }
+        .btn-primary, .btn-small { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <svg class="logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="No Time logo">
+        <defs>
+          <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FB7185" />
+            <stop offset="1" stop-color="#E11D48" />
+          </linearGradient>
+          <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35" />
+            <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#rose)" />
+        <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#shine)" />
+        <path fill="#FFFFFF" d="M20.55 50.13Q18.45 50.13 17.35 48.98Q16.25 47.83 16.25 45.73L16.25 18.42Q16.25 16.27 17.35 15.07Q18.45 13.88 20.30 13.88Q21.85 13.88 22.75 14.50Q23.65 15.13 24.75 16.52L40.60 36.33L39.20 36.33L39.20 18.22Q39.20 16.17 40.27 15.02Q41.35 13.88 43.45 13.88Q45.55 13.88 46.65 15.02Q47.75 16.17 47.75 18.22L47.75 45.92Q47.75 47.77 46.73 48.95Q45.70 50.13 44 50.13Q42.30 50.13 41.33 49.50Q40.35 48.88 39.20 47.48L23.40 27.63L24.80 27.63L24.80 45.73Q24.80 47.83 23.72 48.98Q22.65 50.13 20.55 50.13"/>
+      </svg>
+      <div class="header-text">
+        <h1>No Time</h1>
+        <div class="tagline">For videos that talk too much</div>
+      </div>
+    </div>
+
+    <!-- SETUP (first run) -->
+    <div class="card hidden" id="state-setup">
+      <div class="setup-intro">
+        <div class="setup-title">Welcome! Let's get set up.</div>
+        <div class="setup-sub">Pick a provider and paste your API key. Stored locally in your browser, never sent anywhere else.</div>
+      </div>
+      <div>
+        <label>Provider</label>
+        <div class="provider-cards">
+          <button class="provider-card active" data-provider="anthropic" type="button">
+            <div class="provider-name">Claude</div>
+            <div class="provider-sub">Anthropic</div>
+          </button>
+          <button class="provider-card" data-provider="openai" type="button">
+            <div class="provider-name">OpenAI</div>
+            <div class="provider-sub">GPT</div>
+          </button>
+        </div>
+      </div>
+      <div>
+        <label for="setupKey"><span id="setupKeyLabel">Anthropic API key</span></label>
+        <input id="setupKey" type="password" placeholder="sk-ant-..." autocomplete="off" />
+        <div class="key-help" id="setupKeyHelp">
+          Get a key at <a href="#" id="setupKeyLink" target="_blank">console.anthropic.com</a>
+        </div>
+      </div>
+      <button class="btn-primary" id="setupSave">Save and continue</button>
+      <div class="status" id="setupStatus"></div>
+    </div>
+
+    <!-- READY -->
+    <div class="card hidden" id="state-ready">
+      <div class="provider-chip" id="providerChip">
+        <span class="dot"></span>
+        <span>Using <strong id="providerName">Claude</strong></span>
+      </div>
+      <button class="btn-primary" id="go">Summarize this video</button>
+      <div class="status" id="status"></div>
+      <div id="not-yt" class="hint hidden">Open a YouTube video, then click Summarize.</div>
+      <button class="btn-ghost" id="openOptions">Settings</button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="card hidden" id="state-loading">
+      <div class="loading">
+        <div class="blob"></div>
+        <div class="loading-text" id="loadingText">Summarizing…</div>
+        <div class="loading-sub">Squeezing the filler out. This usually takes 5–15 seconds.</div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="card hidden" id="state-result">
+      <div>
+        <div class="result-meta" id="resultMeta"></div>
+        <h2 class="result-title" id="resultTitle">Summary</h2>
+      </div>
+      <div class="summary" id="summary"></div>
+      <div class="actions-row">
+        <button class="btn-small" id="backBtn">← New summary</button>
+        <button class="btn-small accent" id="openVideoBtn">Open video</button>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
