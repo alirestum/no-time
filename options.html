@@ -325,6 +325,39 @@
         transition: opacity .2s;
       }
       .saved.visible { opacity: 1; }
+
+      .footer {
+        margin-top: 36px;
+        padding-top: 22px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+      .footer-text {
+        font-size: 12px;
+        color: var(--fg-soft);
+        margin-bottom: 12px;
+      }
+      .bmc-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: linear-gradient(145deg, #FFE066, #FFD43B);
+        color: #2a0e1a;
+        text-decoration: none;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        border-radius: var(--radius-sm);
+        box-shadow:
+          6px 8px 16px rgba(255, 196, 0, 0.32),
+          -3px -3px 10px rgba(255, 255, 255, 0.8),
+          inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+        transition: transform .15s cubic-bezier(.34, 1.56, .64, 1);
+      }
+      .bmc-link:hover { transform: translateY(-1px); }
+      .bmc-link:active { transform: scale(0.96); }
+      .bmc-link svg { flex-shrink: 0; }
     </style>
   </head>
   <body>
@@ -403,6 +436,20 @@
     <div class="actions">
       <button class="btn-primary" id="save">Save changes</button>
       <span class="saved" id="saved">Saved.</span>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">No Time is free and open source. If it saved you some time, you can return the favor.</div>
+      <a class="bmc-link" href="https://buymeacoffee.com/alirestum" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17 8h1a4 4 0 0 1 0 8h-1"/>
+          <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/>
+          <line x1="6" y1="2" x2="6" y2="4"/>
+          <line x1="10" y1="2" x2="10" y2="4"/>
+          <line x1="14" y1="2" x2="14" y2="4"/>
+        </svg>
+        Buy me a coffee
+      </a>
     </div>
 
     <script src="options.js"></script>

@@ -13,8 +13,6 @@ Structure:
 <ul>
   <li>3 to 7 concrete insights. Short. No filler. No "the speaker says".</li>
 </ul>
-<h2>Worth watching?</h2>
-<p>One short line: is the video worth the time, or does the summary cover it?</p>
 
 Be blunt. Skip throat-clearing. Use <strong> for the most important phrase in each bullet if useful. If the video genuinely says nothing of substance, say so plainly.`;
 

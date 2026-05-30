@@ -190,35 +190,12 @@ $("openOptions").addEventListener("click", (e) => {
   chrome.runtime.openOptionsPage();
 });
 
-$("backBtn").addEventListener("click", async () => {
-  if (currentTab?.id) {
-    await chrome.storage.local.remove(`summary:${currentTab.id}`);
-  }
-  setStatus("");
-  $("go").disabled = false;
-  showState("state-ready");
-});
-
-$("openVideoBtn").addEventListener("click", async () => {
-  if (!currentTab?.id) return;
-  const key = `summary:${currentTab.id}`;
-  const data = await chrome.storage.local.get(key);
-  const url = data[key]?.meta?.url;
-  if (!url) return;
-  try {
-    await chrome.tabs.update(currentTab.id, { active: true, url });
-    window.close();
-  } catch {
-    await chrome.tabs.create({ url, active: true });
-  }
-});
-
-$("go").addEventListener("click", async () => {
+async function startSummarize() {
   const cfg = await chrome.storage.local.get(["preferredProvider"]);
   const provider = cfg.preferredProvider || "anthropic";
-  const btn = $("go");
-  btn.disabled = true;
+  $("go").disabled = true;
   setStatus("Reading transcript…");
+  showLoading("Reading transcript…");
   try {
     if (!isYouTubeWatch(currentTab?.url)) {
       throw new Error("Open a YouTube video first.");
@@ -246,7 +223,10 @@ $("go").addEventListener("click", async () => {
     console.error("[no-time] popup error", e);
     showReadyWithError(e.message || String(e));
   }
-});
+}
+
+$("go").addEventListener("click", startSummarize);
+$("resummarizeBtn").addEventListener("click", startSummarize);
 
 function startPolling() {
   if (!currentTab?.id) return;
