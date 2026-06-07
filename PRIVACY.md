@@ -1,6 +1,6 @@
 # Privacy Policy — No Time
 
-_Last updated: 2026-05-30_
+_Last updated: 2026-06-07_
 
 No Time is a Chrome extension that summarizes YouTube videos by sending their transcripts to an AI provider of your choice (Anthropic or OpenAI). This document explains exactly what data the extension handles, where it goes, and what it does not do.
 
@@ -19,7 +19,7 @@ Nothing in `chrome.storage.local` is transmitted to the developer or any third p
 
 When you click **Summarize**:
 
-1. The extension reads the active YouTube tab's transcript (either by opening YouTube's built-in transcript panel or by fetching its caption track).
+1. The extension reads the active YouTube tab's transcript through YouTube's transcript panel API.
 2. The transcript, the video title, the channel name, and the video URL are sent **directly from your browser** to the API of the provider you selected:
    - **Anthropic** (`https://api.anthropic.com/v1/messages`), authenticated with your Anthropic API key, **or**
    - **OpenAI** (`https://api.openai.com/v1/chat/completions`), authenticated with your OpenAI API key.

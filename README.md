@@ -19,7 +19,7 @@ A lot of YouTube videos take 40 minutes to make a 3-minute point. No Time pulls 
 
 ## How it works
 
-- A content script on YouTube watch pages extracts the transcript (clicking YouTube's "Show transcript" button, falling back to the caption track if needed).
+- A content script on YouTube watch pages extracts the transcript through YouTube's transcript panel API.
 - The transcript + video metadata are sent **directly from your browser** to the API of the provider you selected. Nothing routes through a third-party server.
 - The result is rendered inline in the popup.
 

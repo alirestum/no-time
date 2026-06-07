@@ -94,10 +94,8 @@ async function runSummarize({ provider, meta, transcript, resultTabId }) {
         body: { ...meta, transcript },
       });
     }
-    console.log("[no-time] summary done");
     await chrome.storage.local.set({ [key]: { status: "ok", summary, meta, provider } });
   } catch (e) {
-    console.error("[no-time] summarize error", e);
     await chrome.storage.local.set({
       [key]: { status: "error", error: e?.message || String(e), meta, provider },
     });

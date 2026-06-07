@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "No Time",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Summarize YouTube videos using their built-in transcripts. Skip the filler — get the point in seconds.",
   "permissions": ["storage", "activeTab"],
   "host_permissions": [

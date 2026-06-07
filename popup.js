@@ -201,7 +201,6 @@ async function startSummarize() {
       throw new Error("Open a YouTube video first.");
     }
     const tx = await chrome.tabs.sendMessage(currentTab.id, { type: "GET_TRANSCRIPT" });
-    console.log("[no-time] transcript response", tx);
     if (!tx?.ok) throw new Error(tx?.error || "Could not get transcript.");
 
     const key = `summary:${currentTab.id}`;
@@ -220,7 +219,6 @@ async function startSummarize() {
 
     startPolling();
   } catch (e) {
-    console.error("[no-time] popup error", e);
     showReadyWithError(e.message || String(e));
   }
 }
